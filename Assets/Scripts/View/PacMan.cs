@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PacMan : MonoBehaviour
 {
-    //private Vector3 dest; // Ä¿±êÎ»ÖÃ
+    //private Vector3 dest; // ç›®æ ‡ä½ç½®
     private Rigidbody rb;
     private Vector3 move;
     private float forwardAmount;
     private float turnAmount;
-    private float forwardSpeed = 0.5f;
+    private float forwardSpeed = 0.2f;
     private float turnSpeed = 10f;
 
     //public float speed = 1f;
@@ -19,7 +19,7 @@ public class PacMan : MonoBehaviour
 
     void Start()
     {
-        //dest = transform.position; // ³õÊ¼Î»ÖÃ
+        //dest = transform.position; // åˆå§‹ä½ç½®
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0, 0, 0);
     }
@@ -30,8 +30,11 @@ public class PacMan : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         move = new Vector3(x, 0, z);
         Vector3 localMove = transform.InverseTransformVector(move);
+        //forwardAmount = localMove.z;
         forwardAmount = localMove.z;
         turnAmount = Mathf.Atan2(localMove.x, localMove.z);
+        Debug.Log("moveï¼š" + move + "  localMoveï¼š" + localMove);
+        Debug.Log("forwardAmountï¼š" + forwardAmount + "  turnAmountï¼š" + turnAmount);
     }
 
     private void FixedUpdate()
@@ -41,14 +44,14 @@ public class PacMan : MonoBehaviour
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, turnAmount * turnSpeed, 0), angleSpeed);
 
-        ////±ÜÃâÊÕµ½Á¦µÄ×÷ÓÃ·´µ¯ºóÒ»Ö±Æ®¶¯
-        //GetComponent<Rigidbody>().velocity = Vector3.zero; //£¨ Vector3.zero = new Vector3(0, 0, 0)£©
+        ////é¿å…æ”¶åˆ°åŠ›çš„ä½œç”¨åå¼¹åä¸€ç›´é£˜åŠ¨
+        //GetComponent<Rigidbody>().velocity = Vector3.zero; //ï¼ˆ Vector3.zero = new Vector3(0, 0, 0)ï¼‰
 
         //if (transform.position == dest)
         //{
         //    if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
         //    {
-        //        Debug.Log("Ç°");
+        //        Debug.Log("å‰");
         //        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.forward), angleSpeed);
         //        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), angleSpeed);
         //        dest = transform.position + Vector3.forward * Time.deltaTime; // (0,0,1)
@@ -56,40 +59,46 @@ public class PacMan : MonoBehaviour
         //    }
         //    if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)))
         //    {
-        //        Debug.Log("ÓÒ");
+        //        Debug.Log("å³");
         //        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90, 0), angleSpeed);
         //        //dest = transform.position + Vector3.right * Time.deltaTime; // (0,0,1)
         //        dest = transform.position + Vector3.right; // (0,0,1)
         //    }
         //    if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
         //    {
-        //        Debug.Log("×ó");
+        //        Debug.Log("å·¦");
         //        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, -90, 0), angleSpeed);
         //        //dest = transform.position + Vector3.left * Time.deltaTime; // (0,0,1)
         //        dest = transform.position + Vector3.left; // (0,0,1)
         //    }
         //    if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
         //    {
-        //        Debug.Log("ºó");
+        //        Debug.Log("å");
         //        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 180, 0), angleSpeed);
         //        //dest = transform.position + Vector3.back; // (0,0,1)
         //        dest = transform.position + Vector3.back * Time.deltaTime; // (0,0,1)
         //    }
         //}
 
-        //Vector3 nextPos = Vector3.MoveTowards(transform.position, dest, speed); // ´Ótransform.position×î´ó¾àÀë²»³¬¹ıspeedÎªÒÆ¶¯²½ÆµÒÆÏòdest
+        //Vector3 nextPos = Vector3.MoveTowards(transform.position, dest, speed); // ä»transform.positionæœ€å¤§è·ç¦»ä¸è¶…è¿‡speedä¸ºç§»åŠ¨æ­¥é¢‘ç§»å‘dest
         //rb.MovePosition(nextPos);
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        //Åö×²µ½µÄÓÎÏ·ÎïÌåÃû×Ö
-        Debug.Log("PacManÅöµ½ÎïÌå£º" + collision.gameObject.name);
-        if (collision.gameObject.name == "Dot")
+        //ç¢°æ’åˆ°çš„æ¸¸æˆç‰©ä½“åå­—
+        Debug.Log("PacManç¢°åˆ°ç‰©ä½“ï¼š" + collision.gameObject.tag);
+        if (collision.gameObject.tag == "Dot")
         {
-            collision.gameObject.GetComponent<Dot>().Dispear(); // ³Ôµô¶¹×Ó
-            ScoreChangeEvent.Trigger(); // ¸üĞÂÒ³Ãæ
-            GameService.GetInstanvce().GameOver();
+            Debug.Log("åƒæ‰è±†å­");
+            collision.gameObject.GetComponent<Dot>().Dispear(); // åƒæ‰è±†å­
+            ScoreChangeEvent.Trigger(); // æ›´æ–°é¡µé¢
+            if (GameService.GetInstance().IsSuccess()) GameService.GetInstance().Success();
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("ç¢°åˆ°æ•Œäºº"); // æ¸¸æˆå¤±è´¥
+            GameService.GetInstance().Fail();
         }
     }
 }

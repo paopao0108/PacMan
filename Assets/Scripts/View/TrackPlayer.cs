@@ -6,28 +6,28 @@ using UnityEngine.AI;
 public class TrackPlayer : MonoBehaviour
 {
     //public NavMeshAgent agent;
-    //public Transform[] Points;//Í¨¹ıÊı×éĞÎÊ½¿ÉÉèÖÃ¶à¸ö¼à²âµã
+    //public Transform[] Points;//é€šè¿‡æ•°ç»„å½¢å¼å¯è®¾ç½®å¤šä¸ªç›‘æµ‹ç‚¹
     //int currentPoint;
 
     //void Start()
     //{
     //    agent = GetComponent<NavMeshAgent>();
-    //    agent.SetDestination(Points[0].position);//Í¨¹ıNav Mesh Agent×é¼şµÄSetDestination ·½·¨À¨ºÅÄÚÎªÒ»¸öVector3Ä¿±êµã
+    //    agent.SetDestination(Points[0].position);//é€šè¿‡Nav Mesh Agentç»„ä»¶çš„SetDestination æ–¹æ³•æ‹¬å·å†…ä¸ºä¸€ä¸ªVector3ç›®æ ‡ç‚¹
     //}
 
     //void Update()
     //{
-    //    if (agent.remainingDistance < agent.stoppingDistance)//µ½Ä¿±êµÄÊ£Óà¾àÀëÊÇ·ñĞ¡ÓÚÖ®Ç°ÔÚ Inspector´°¿ÚÖĞÉèÖÃµÄÍ£Ö¹¾àÀë
+    //    if (agent.remainingDistance < agent.stoppingDistance)//åˆ°ç›®æ ‡çš„å‰©ä½™è·ç¦»æ˜¯å¦å°äºä¹‹å‰åœ¨ Inspectorçª—å£ä¸­è®¾ç½®çš„åœæ­¢è·ç¦»
     //    {
-    //        currentPoint = (currentPoint + 1) % Points.Length;//²ÉÓÃÈ¡ÓàµÄ·½·¨ÊµÏÖµĞÈËÑ²Âß¹ì¼£µÄÑ­»·
+    //        currentPoint = (currentPoint + 1) % Points.Length;//é‡‡ç”¨å–ä½™çš„æ–¹æ³•å®ç°æ•Œäººå·¡é€»è½¨è¿¹çš„å¾ªç¯
     //        agent.SetDestination(Points[currentPoint].position);
     //    }
     //}
 
-    //×Ô¶¯×·×Ùangent
+    //è‡ªåŠ¨è¿½è¸ªangent
     private NavMeshAgent _mNavMeshAgent;
 
-    //AIÒª×·×ÙµÄÎïÌå£¬ÎÒÃÇµÄÍæ¼ÒµÄÎ»ÖÃ
+    //AIè¦è¿½è¸ªçš„ç‰©ä½“ï¼Œæˆ‘ä»¬çš„ç©å®¶çš„ä½ç½®
     public Transform playerTransform;
     // Start is called before the first frame update
 
@@ -35,14 +35,14 @@ public class TrackPlayer : MonoBehaviour
     {
         _mNavMeshAgent = GetComponent<NavMeshAgent>();
 
-        //ÉèÖÃ×·×ÙÍ£Ö¹µÄ×î½ü¾àÀë£¬Ğ¡ÓÚµÈÓÚÕâ¸ö¾ßÌå£¬¾Í²»»áÔÚ½øĞĞ×·×Ù£¬µ«ÊÇÒ»³¬¹ı¾Í»á¼ÌĞø×·×Ù
-        _mNavMeshAgent.stoppingDistance = 2.0f;
+        //è®¾ç½®è¿½è¸ªåœæ­¢çš„æœ€è¿‘è·ç¦»ï¼Œå°äºç­‰äºè¿™ä¸ªå…·ä½“ï¼Œå°±ä¸ä¼šåœ¨è¿›è¡Œè¿½è¸ªï¼Œä½†æ˜¯ä¸€è¶…è¿‡å°±ä¼šç»§ç»­è¿½è¸ª
+        _mNavMeshAgent.stoppingDistance = 0.0f;
 
     }
 
     void Update()
     {
-        //ÉèÖÃÄ¿±êÎ»ÖÃ
+        //è®¾ç½®ç›®æ ‡ä½ç½®
         _mNavMeshAgent.SetDestination(playerTransform.position);
     }
 }

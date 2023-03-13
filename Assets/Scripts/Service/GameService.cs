@@ -5,24 +5,36 @@ public class GameService
     private static GameService _instance;
 
     private GameService() { }
-    public static GameService GetInstanvce()
+    public static GameService GetInstance()
     {
         if (_instance == null) _instance = new GameService();
         return _instance;
     }
 
-    public void GameOver()
+    public bool IsSuccess()
     {
-        // Ê§°Ü
-        // 1. Åöµ½µĞÈË
-        // 2. ×ß³öÃÔ¹¬
+        // å¤±è´¥
+        // 1. ç¢°åˆ°æ•Œäºº
+        // 2. èµ°å‡ºè¿·å®«
 
-        // Ê¤Àû
-        // 3. ³ÔÍê¶¹×Ó£¬²¢ÇÒÔÚÃÔ¹¬ÖĞ
+        // èƒœåˆ©
+        // 3. åƒå®Œè±†å­ï¼Œå¹¶ä¸”åœ¨è¿·å®«ä¸­
+        //Console.WriteLine("å½“å‰åˆ†æ•°ï¼š" + ScoreModel.GetInstance().CurScore);
+        //Console.WriteLine("ç›®æ ‡åˆ†æ•°ï¼š" + GameModel.GetInstance().Score);
         if (ScoreModel.GetInstance().CurScore >= GameModel.GetInstance().Score)
         {
-            Console.WriteLine("ÓÎÏ·Ê¤Àû£¡£¡");
+            return true;
         }
-         
+        return false;
+    }
+
+    public void Fail()
+    {
+        // å¤„ç†å¤±è´¥é€»è¾‘
+    }
+
+    public void Success()
+    {
+        // å¤„ç†æˆåŠŸé€»è¾‘
     }
 }

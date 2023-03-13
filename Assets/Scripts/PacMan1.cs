@@ -7,45 +7,45 @@ public class PacMan1 : MonoBehaviour
     public float speed = 0.05f;
 
     private Vector3 dest = Vector3.zero;
-    private float angleSpeed = 100; // Ğı×ªµÄ½ÇËÙ¶È
+    private float angleSpeed = 100; // æ—‹è½¬çš„è§’é€Ÿåº¦
 
 
     private void Start()
     {
-        dest = transform.position; // ³õÊ¼»¯³Ô¶¹ÈËµÄÄ¿±êÎ»ÖÃ£¨ÓÎÏ·¿ªÊ¼±£Ö¤³Ô¶¹ÈË²»»áÒÆ¶¯£©
+        dest = transform.position; // åˆå§‹åŒ–åƒè±†äººçš„ç›®æ ‡ä½ç½®ï¼ˆæ¸¸æˆå¼€å§‹ä¿è¯åƒè±†äººä¸ä¼šç§»åŠ¨ï¼‰
     }
 
     private void FixedUpdate()
     {
         //rigidbody.MovePosition(Vector2.Lerp(transform.position, targetPos, smoothing * Time.deltaTime));
 
-        Vector3 temp = Vector3.MoveTowards(transform.position, dest, speed); // »ñÈ¡ÏÂÒ»´ÎÒÆ¶¯µÄ×ø±ê
+        Vector3 temp = Vector3.MoveTowards(transform.position, dest, speed); // è·å–ä¸‹ä¸€æ¬¡ç§»åŠ¨çš„åæ ‡
 
-        GetComponent<Rigidbody>().MovePosition(temp); // ÀûÓÃ¸ÕÌå½«ÎïÌåÒÆ¶¯µ½ÏÂÒ»´ÎµÄ×ø±êÎ»ÖÃ
+        GetComponent<Rigidbody>().MovePosition(temp); // åˆ©ç”¨åˆšä½“å°†ç‰©ä½“ç§»åŠ¨åˆ°ä¸‹ä¸€æ¬¡çš„åæ ‡ä½ç½®
 
-        if (transform.position == dest) // µ±ÎïÌåÒÑ¾­µ½´ïÉÏÒ»¸öÄ¿±ê×ø±êºó£¬²Å¿ÉÒÔ¼ÌĞøÒÆ¶¯
+        if (transform.position == dest) // å½“ç‰©ä½“å·²ç»åˆ°è¾¾ä¸Šä¸€ä¸ªç›®æ ‡åæ ‡åï¼Œæ‰å¯ä»¥ç»§ç»­ç§»åŠ¨
         {
             if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && ValidDirection(Vector3.forward))
             {
-                Debug.Log("Ç°");
+                Debug.Log("å‰");
                 dest = transform.position + Vector3.forward; // (0,0,1)
                 //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.forward), angleSpeed*Time.deltaTime);
             }
             if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && ValidDirection(Vector3.forward))
             {
-                Debug.Log("ºó");
+                Debug.Log("å");
                 dest = transform.position + Vector3.back;
                 //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.back), angleSpeed * Time.deltaTime);
             }
             if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && ValidDirection(Vector3.forward))
             {
-                Debug.Log("×ó");
+                Debug.Log("å·¦");
                 dest = transform.position + Vector3.left;
                 //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.left), angleSpeed * Time.deltaTime);
             }
             if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && ValidDirection(Vector3.forward))
             {
-                Debug.Log("ÓÒ");
+                Debug.Log("å³");
                 dest = transform.position + Vector3.right;
                 //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.right), angleSpeed * Time.deltaTime);
 
@@ -54,21 +54,21 @@ public class PacMan1 : MonoBehaviour
     }
 
     /// <summary>
-    /// ÑéÖ¤Ç°½ø·½ÏòÊÇ·ñÓĞĞ§
+    /// éªŒè¯å‰è¿›æ–¹å‘æ˜¯å¦æœ‰æ•ˆ
     /// </summary>
     /// <param name="direction"></param>
     /// <returns></returns>
     private bool ValidDirection(Vector3 direction)
     {
-        //Vector2 dir = new Vector2(direction.x, direction.z); // Ä¿±ê·½Ïò
-        //Vector2 pos = new Vector2(transform.position.x, transform.position.z); // µ±Ç°Î»ÖÃ
-        //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos); // ´ÓÄ¿±êÎ»ÖÃÏòµ±Ç°Î»ÖÃ·¢ÉäÒ»ÌõÉäÏß£¬´æ´¢ÉäÏßĞÅÏ¢
-        //return hit.collider == GetComponent<Collider>(); // ·µ»ØµÄÉäÏßÊÇ·ñ¿ÉÒÔ´òµ½³Ô¶¹ÈË×ÔÉíµÄÅö×²Æ÷
+        //Vector2 dir = new Vector2(direction.x, direction.z); // ç›®æ ‡æ–¹å‘
+        //Vector2 pos = new Vector2(transform.position.x, transform.position.z); // å½“å‰ä½ç½®
+        //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos); // ä»ç›®æ ‡ä½ç½®å‘å½“å‰ä½ç½®å‘å°„ä¸€æ¡å°„çº¿ï¼Œå­˜å‚¨å°„çº¿ä¿¡æ¯
+        //return hit.collider == GetComponent<Collider>(); // è¿”å›çš„å°„çº¿æ˜¯å¦å¯ä»¥æ‰“åˆ°åƒè±†äººè‡ªèº«çš„ç¢°æ’å™¨
 
 
-        Vector3 dir = new Vector2(direction.x, direction.z); // Ä¿±ê·½Ïò
-        Vector3 pos = new Vector2(transform.position.x, transform.position.z); // µ±Ç°Î»ÖÃ
-        bool Ishit = Physics.Linecast(pos + dir, pos); // ´ÓÄ¿±êÎ»ÖÃÏòµ±Ç°Î»ÖÃ·¢ÉäÒ»ÌõÉäÏß£¬´æ´¢ÉäÏßĞÅÏ¢
-        return Ishit; // ·µ»ØµÄÉäÏßÊÇ·ñ¿ÉÒÔ´òµ½³Ô¶¹ÈË×ÔÉíµÄÅö×²Æ÷
+        Vector3 dir = new Vector2(direction.x, direction.z); // ç›®æ ‡æ–¹å‘
+        Vector3 pos = new Vector2(transform.position.x, transform.position.z); // å½“å‰ä½ç½®
+        bool Ishit = Physics.Linecast(pos + dir, pos); // ä»ç›®æ ‡ä½ç½®å‘å½“å‰ä½ç½®å‘å°„ä¸€æ¡å°„çº¿ï¼Œå­˜å‚¨å°„çº¿ä¿¡æ¯
+        return Ishit; // è¿”å›çš„å°„çº¿æ˜¯å¦å¯ä»¥æ‰“åˆ°åƒè±†äººè‡ªèº«çš„ç¢°æ’å™¨
     }
 }

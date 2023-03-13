@@ -3,7 +3,7 @@ using System;
 public class GameModel 
 {
     private static GameModel _instance;
-    private int _score; // »ñµÃÊ¤ÀûµÄ·ÖÊý
+    private int _score = 13; // èŽ·å¾—èƒœåˆ©çš„åˆ†æ•°
 
     private GameModel() { }
 
