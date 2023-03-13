@@ -89,6 +89,7 @@ public class PacMan : MonoBehaviour
         {
             collision.gameObject.GetComponent<Dot>().Dispear(); // 吃掉豆子
             ScoreChangeEvent.Trigger(); // 更新页面
+            GameService.GetInstanvce().GameOver();
         }
     }
 }

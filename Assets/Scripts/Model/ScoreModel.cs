@@ -13,9 +13,7 @@ public class ScoreModel
     public int BestScore { get => _bestScore; set => _bestScore = value; }
     public int CurScore { get => _curScore; set => _curScore = value; }
 
-    private ScoreModel()
-    {
-    }
+    private ScoreModel(){ }
 
     public static ScoreModel GetInstance()
     {
