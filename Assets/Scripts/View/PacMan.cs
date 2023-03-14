@@ -15,12 +15,17 @@ public class PacMan : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = startPos;
+        //InitOrReset();
+    }
+
+    private void Start()
+    {
+        GameEvent.gameAgain.Register(InitOrReset);
     }
 
     private void FixedUpdate()
     {
-        if (!GameController.GetInstance().IsGameStart || GameController.GetInstance().IsGameOver) return;
+        if (!GameModel.IsGameStart || GameModel.IsGameOver) return;
         if (IsDrop(transform.position.y)) GameController.GetInstance().Fail();
 
         float horizontal = Input.GetAxis("Horizontal");
@@ -34,6 +39,10 @@ public class PacMan : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, angle, 0), angleSpeed);
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.gameAgain.UnRegister(InitOrReset);
+    }
 
     public void InitOrReset()
     {
@@ -61,7 +70,7 @@ public class PacMan : MonoBehaviour
         {
             Debug.Log("吃掉豆子");
             collision.gameObject.GetComponent<Dot>().Dispear(); // 吃掉豆子
-            ScoreChangeEvent.Trigger(); // 更新页面分数
+            GameEvent.scoreChange.Trigger(); // 更新页面分数
             if (GameController.GetInstance().IsSuccess()) GameController.GetInstance().Success(); // 判断是否取胜
         }
         else if (collision.gameObject.tag == "Enemy")

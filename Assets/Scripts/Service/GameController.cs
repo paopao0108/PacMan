@@ -5,12 +5,6 @@ using UnityEngine;
 public class GameController
 {
     private static GameController _instance;
-
-    public bool IsSwitchCamera = false; // 相机拉近
-    public bool IsReadying = false; // 倒计时准备
-    public bool IsGameStart = false; // 游戏开始
-    public bool IsGameOver = false; // 游戏结束
-
     private GameController() { }
 
     public static GameController GetInstance()
@@ -50,7 +44,8 @@ public class GameController
     // 成功或失败都是GameOver
     private void GameOver()
     {
-        IsGameOver = true;
+        GameModel.IsGameOver = true;
         if (ScoreModel.GetInstance().BestScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", ScoreModel.GetInstance().BestScore);
+        GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true);
     }
 }

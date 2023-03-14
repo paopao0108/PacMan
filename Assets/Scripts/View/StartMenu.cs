@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuButton : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
     public Button startBtn;
     public Button RankBtn;
     public Button settingBtn;
-    void Start()
+    private void Awake()
     {
         startBtn = transform.Find("StartBtn").GetComponent<Button>();
         RankBtn = transform.Find("RankBtn").GetComponent<Button>();
         settingBtn = transform.Find("SettingBtn").GetComponent<Button>();
     }
+    void Start()
+    {
+        startBtn.onClick.AddListener(OnStartBtnClick);
+    }
 
     public void OnStartBtnClick()
     {
-        GameController.GetInstance().IsSwitchCamera = true;
+        GameModel.IsSwitchCamera = true;
         gameObject.SetActive(false);
     }
 }

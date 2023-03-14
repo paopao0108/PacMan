@@ -14,9 +14,9 @@ public class FollowPlayer : MonoBehaviour
         offset = camera.endPos - pacMan.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        if (!GameController.GetInstance().IsGameStart) return;
+        if (!GameModel.IsGameStart) return;
         transform.position = offset + pacMan.position;
     }
 }

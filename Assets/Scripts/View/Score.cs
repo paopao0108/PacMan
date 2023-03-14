@@ -16,21 +16,23 @@ public class Score : MonoBehaviour
     {
         _bestScoreText = transform.Find("bestScore/value").GetComponent<TextMeshProUGUI>();
         _curScoreText = transform.Find("curScore/value").GetComponent<TextMeshProUGUI>();
-        ScoreChangeEvent.Register(OnScoreChange); // ×¢²áÊÂ¼ş
+        GameEvent.scoreChange.Register(OnScoreChange); // æ³¨å†Œäº‹ä»¶
+        GameEvent.gameAgain.Register(InitOrReset);
     }
 
     private void OnDestroy()
     {
-        ScoreChangeEvent.UnRegister(OnScoreChange); // ×¢ÏúÊÂ¼ş
+        GameEvent.scoreChange.UnRegister(OnScoreChange); // æ³¨é”€äº‹ä»¶
+        GameEvent.gameAgain.UnRegister(InitOrReset);
     }
 
     private void OnScoreChange()
     {
-        // ¸üĞÂÊı¾İºÍÒ³Ãæ£¨±íÏÖ²ã£©
-        ScoreModel.GetInstance().UpdateScore(); // ¸üĞÂ·ÖÊı
-        _curScoreText.text = "CURRENT SCORE: " + ScoreModel.GetInstance().CurScore; // ¸üĞÂÒ³Ãæ
+        // æ›´æ–°æ•°æ®å’Œé¡µé¢ï¼ˆè¡¨ç°å±‚ï¼‰
+        ScoreModel.GetInstance().UpdateScore(); // æ›´æ–°åˆ†æ•°
+        _curScoreText.text = "CURRENT SCORE: " + ScoreModel.GetInstance().CurScore; // æ›´æ–°é¡µé¢
         _bestScoreText.text = "BEST SCORE: " + ScoreModel.GetInstance().BestScore;
-        //Debug.Log("×î¸ß·Ö£º" + PlayerPrefs.GetInt("BestScore"));
+        //Debug.Log("æœ€é«˜åˆ†ï¼š" + PlayerPrefs.GetInt("BestScore"));
         //_bestScoreText.text = "BEST SCORE: " + PlayerPrefs.GetInt("BestScore");
     }
 

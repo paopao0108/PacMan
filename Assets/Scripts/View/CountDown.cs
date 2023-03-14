@@ -9,7 +9,7 @@ public class CountDown : MonoBehaviour
     public int countDown = 3;
     public float timeInterval = 1;
 
-    // ÓÎÏ·¿ªÊ¼µ¹¼ÆÊ±£¬½áÊøºóÏÔÊ¾ Ready GO
+    // æ¸¸æˆå¼€å§‹å€’è®¡æ—¶ï¼Œç»“æŸåæ˜¾ç¤º Ready GO
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class CountDown : MonoBehaviour
     void Update()
     {
         if (countDown < 0) EndCountDown();
-        if (!GameController.GetInstance().IsReadying || countDown < 0) return;
+        if (!GameModel.IsReadying || countDown < 0) return;
         if (timeInterval > 0) { 
             timeInterval -= Time.deltaTime;
             ChangeFontSize();
@@ -46,10 +46,10 @@ public class CountDown : MonoBehaviour
 
     }
 
-    // ¼ÆÊ±½áÊø
+    // è®¡æ—¶ç»“æŸ
     public virtual void EndCountDown()
     {
         gameObject.SetActive(false);
-        GameController.GetInstance().IsGameStart = true;
+        GameModel.IsGameStart = true;
     }
 }

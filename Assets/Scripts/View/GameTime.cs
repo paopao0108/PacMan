@@ -19,7 +19,7 @@ public class GameTime : MonoBehaviour
     void Update()
     {
         if (countDown < 0) EndCountDown();
-        if (!GameController.GetInstance().IsGameStart || countDown < 0) return;
+        if (!GameModel.IsGameStart || countDown < 0) return;
         if (timeInterval > 0)
         {
             timeInterval -= Time.deltaTime;
@@ -43,10 +43,10 @@ public class GameTime : MonoBehaviour
         number.text = "LeftTime: " + countDown + "s";
     }
 
-    // ¼ÆÊ±½áÊø
+    // è®¡æ—¶ç»“æŸ
     public void EndCountDown()
     {
-        Debug.Log("ÓÎÏ·Ê±¼äÓÃÍê£¡");
-        GameController.GetInstance().Fail(); // ÓÃÊ±½áÊø£¬ÓÎÏ·½áÊø
+        Debug.Log("æ¸¸æˆæ—¶é—´ç”¨å®Œï¼");
+        GameController.GetInstance().Fail(); // ç”¨æ—¶ç»“æŸï¼Œæ¸¸æˆç»“æŸ
     }
 }

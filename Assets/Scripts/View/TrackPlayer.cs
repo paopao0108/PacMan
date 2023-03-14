@@ -44,7 +44,7 @@ public class TrackPlayer : MonoBehaviour
 
     void Update()
     {
-        if (!GameController.GetInstance().IsGameStart || GameController.GetInstance().IsGameOver) return;
+        if (!GameModel.IsGameStart || GameModel.IsGameOver) return;
         //设置目标位置
         _mNavMeshAgent.SetDestination(playerTransform.position);
     }

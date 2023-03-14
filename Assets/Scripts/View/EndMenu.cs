@@ -8,28 +8,26 @@ public class EndMenu : MonoBehaviour
     public Button againBtn;
     public Button rankBtn;
     public Button exitBtn;
-    void Start()
+    private void Awake()
     {
         againBtn = transform.Find("AgainBtn").GetComponent<Button>();
         rankBtn = transform.Find("RankBtn").GetComponent<Button>();
         exitBtn = transform.Find("ExitBtn").GetComponent<Button>();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (GameController.GetInstance().IsGameOver) gameObject.SetActive(true);
+        againBtn.onClick.AddListener(OnAgainBtnClick);
     }
 
     public void OnAgainBtnClick()
     {
-        // 1. Òş²Øµ±Ç°Ò³Ãæ
+        // 1. éšè—å½“å‰é¡µé¢
         gameObject.SetActive(false);
-        // 2. ÖØÖÃÉãÏñÍ·
 
-        // 3. ÖØÖÃ·ÖÊı¡¢¼ÆÊ±Æ÷
-
-        // 4. ÖØÖÃÎïÌåÎ»ÖÃ
-
+        GameModel.Reset();
+        GameEvent.gameAgain.Trigger(); // é‡ç½®æ‘„åƒå¤´ é‡ç½®ç‰©ä½“ä½ç½®; é‡ç½®åˆ†æ•°ã€è®¡æ—¶å™¨
     }
+
+
+
 }

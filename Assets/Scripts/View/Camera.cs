@@ -18,25 +18,38 @@ public class Camera : MonoBehaviour
     {
         InitOrReset();
     }
+
     void Start()
     {
-        
+        GameEvent.gameAgain.Register(InitOrReset);
     }
 
     private void Update()
     {
-        if (!GameController.GetInstance().IsSwitchCamera) return;
+        if (!GameModel.IsSwitchCamera) return;
         if (transform.position.y > endPos.y) transform.Translate(Vector3.forward * speed * Time.deltaTime);
         if (transform.position.z < endPos.z) transform.Translate(Vector3.up * speed * Time.deltaTime);
         if (Mathf.Abs(transform.position.y - endPos.y) < 0.1 &&
             Mathf.Abs(transform.position.z - endPos.z) < 0.1 &&
-            transform.rotation.x > _endRot.x) 
-            transform.rotation = Quaternion.Lerp(transform.rotation, _endRot, angleSpeed*Time.deltaTime);
-        if (IsReady()) GameController.GetInstance().IsReadying = true;
+            transform.rotation.x > _endRot.x)
+            transform.rotation = Quaternion.Lerp(transform.rotation, _endRot, angleSpeed * Time.deltaTime);
+        if (IsReady())
+        {
+            gameObject.GetComponent<FollowPlayer>().enabled = true;
+            GameModel.IsReadying = true; 
+        }
+    }
+
+
+    private void OnDestroy()
+    {
+        GameEvent.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()
     {
+        Debug.Log("重置相机位置");
+        gameObject.GetComponent<FollowPlayer>().enabled = false;
         transform.position = _startPos;
         transform.rotation = _startRot;
     }
