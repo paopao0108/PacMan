@@ -34,6 +34,8 @@ public class ScoreModel
 
     public void UpdateBestScore()
     {
+        //Debug.Log("更新最高分: " + PlayerPrefs.GetInt("BestScore"));
+        //if (CurScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", CurScore);  // BestScore = CurScore;
         if (CurScore > BestScore) BestScore = CurScore;
     }
 }

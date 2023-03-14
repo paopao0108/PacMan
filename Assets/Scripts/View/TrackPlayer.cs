@@ -26,23 +26,27 @@ public class TrackPlayer : MonoBehaviour
 
     //自动追踪angent
     private NavMeshAgent _mNavMeshAgent;
+   
 
     //AI要追踪的物体，我们的玩家的位置
     public Transform playerTransform;
-    // Start is called before the first frame update
+    public float stopDistance = 0.0f;
 
     void Start()
     {
         _mNavMeshAgent = GetComponent<NavMeshAgent>();
 
         //设置追踪停止的最近距离，小于等于这个具体，就不会在进行追踪，但是一超过就会继续追踪
-        _mNavMeshAgent.stoppingDistance = 0.0f;
+        _mNavMeshAgent.stoppingDistance = stopDistance;
 
+        //StartCoroutine("ChangeTrackerCount"); // 启动协程
     }
 
     void Update()
     {
+        if (!GameController.GetInstance().IsGameStart || GameController.GetInstance().IsGameOver) return;
         //设置目标位置
         _mNavMeshAgent.SetDestination(playerTransform.position);
     }
+
 }
