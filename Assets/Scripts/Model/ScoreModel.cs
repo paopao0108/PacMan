@@ -12,6 +12,7 @@ public class ScoreModel
 
     public int BestScore { get => _bestScore; set => _bestScore = value; }
     public int CurScore { get => _curScore; set => _curScore = value; }
+    public static List<int> scoreRank = new List<int>();
 
     private ScoreModel(){ }
 
@@ -37,5 +38,16 @@ public class ScoreModel
         //Debug.Log("更新最高分: " + PlayerPrefs.GetInt("BestScore"));
         //if (CurScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", CurScore);  // BestScore = CurScore;
         if (CurScore > BestScore) BestScore = CurScore;
+    }
+
+    public void UpdateScoreRank()
+    {
+        scoreRank.Add(CurScore);
+        scoreRank.Sort(); // 排序
+    }
+
+    public int GetRank()
+    {
+        return scoreRank.IndexOf(CurScore) + 1;
     }
 }

@@ -8,14 +8,17 @@ public class PacMan : MonoBehaviour
     private float y; // 对象的y坐标
     private Vector3 startPos = new Vector3(0.12f, 1.69f, 6.93f);
 
-    public float dropRange = 3; // 掉落高度的范围
+    public float dropRange = 3; // 允许掉落高度的范围
     public float angleSpeed = 0.5f;
     public float speed = 10.0f;
     public Score score;
 
     private void Awake()
     {
-        //InitOrReset();
+        //transform.position = startPos;
+        //Debug.Log("吃豆人世界坐标：" + transform.position);
+        //Debug.Log("吃豆人自身坐标：" + transform.localPosition);
+        InitOrReset();
     }
 
     private void Start()
@@ -46,7 +49,7 @@ public class PacMan : MonoBehaviour
 
     public void InitOrReset()
     {
-        transform.position = startPos; // 初始化位置
+        transform.localPosition = startPos; // 初始化位置
         transform.rotation = Quaternion.Euler(0, 0, 0); // 初始化角度
     }
 

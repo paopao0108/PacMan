@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameTime : MonoBehaviour
 {
-    public static int countDown = 60;
+    //public static int GameModel.gameCountDown = 60;
     private TextMeshProUGUI number;
     public float timeInterval = 1;
 
@@ -18,8 +18,8 @@ public class GameTime : MonoBehaviour
      
     void Update()
     {
-        if (countDown < 0) EndCountDown();
-        if (!GameModel.IsGameStart || countDown < 0) return;
+        if (GameModel.gameCountDown < 0) EndCountDown();
+        if (!GameModel.IsGameStart || GameModel.gameCountDown < 0) return;
         if (timeInterval > 0)
         {
             timeInterval -= Time.deltaTime;
@@ -33,14 +33,14 @@ public class GameTime : MonoBehaviour
 
     public void InitOrReset()
     {
-        countDown = 60;
-        number.text = "LeftTime: " + countDown + "s";
+        GameModel.gameCountDown = 60;
+        number.text = "LeftTime: " + GameModel.gameCountDown + "s";
     }
 
     public void ChangeText()
     {
-        --countDown;
-        number.text = "LeftTime: " + countDown + "s";
+        --GameModel.gameCountDown;
+        number.text = "LeftTime: " + GameModel.gameCountDown + "s";
     }
 
     // 计时结束

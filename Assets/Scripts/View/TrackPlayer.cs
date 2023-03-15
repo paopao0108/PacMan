@@ -24,29 +24,41 @@ public class TrackPlayer : MonoBehaviour
     //    }
     //}
 
-    //自动追踪angent
-    private NavMeshAgent _mNavMeshAgent;
-   
-
-    //AI要追踪的物体，我们的玩家的位置
-    public Transform playerTransform;
+    
+    public NavMeshAgent _mNavMeshAgent; // 自动追踪agent
+    public Transform playerTransform; // 要追踪的物体
     public float stopDistance = 0.0f;
 
     void Start()
     {
         _mNavMeshAgent = GetComponent<NavMeshAgent>();
-
-        //设置追踪停止的最近距离，小于等于这个具体，就不会在进行追踪，但是一超过就会继续追踪
-        _mNavMeshAgent.stoppingDistance = stopDistance;
-
-        //StartCoroutine("ChangeTrackerCount"); // 启动协程
+        _mNavMeshAgent.stoppingDistance = stopDistance; //设置追踪停止的最近距离，小于等于这个具体，就不会在进行追踪，一旦超过就会继续追踪
+        InitOrReset();
+        GameEvent.gameStart.Register(StartTrack); // 注册开始追踪事件
+        GameEvent.gameAgain.Register(InitOrReset);
     }
 
     void Update()
     {
         if (!GameModel.IsGameStart || GameModel.IsGameOver) return;
-        //设置目标位置
-        _mNavMeshAgent.SetDestination(playerTransform.position);
+        //if (!_mNavMeshAgent.isStopped) return;
+        _mNavMeshAgent.SetDestination(playerTransform.position); //设置目标位置
+        Debug.Log("正在追踪！");
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.gameStart.UnRegister(StartTrack);
+        GameEvent.gameAgain.UnRegister(InitOrReset);
+    }
+
+    public void InitOrReset()
+    {
+        _mNavMeshAgent.isStopped = true;
+    }
+
+    public void StartTrack()
+    {
+        _mNavMeshAgent.isStopped = false;
+    }
 }

@@ -22,6 +22,7 @@ public class Camera : MonoBehaviour
     void Start()
     {
         GameEvent.gameAgain.Register(InitOrReset);
+        //Debug.Log("倒计时：" + GameObject.Find("Time").transform.Find("countDown"));
     }
 
     private void Update()
@@ -35,8 +36,9 @@ public class Camera : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, _endRot, angleSpeed * Time.deltaTime);
         if (IsReady())
         {
-            gameObject.GetComponent<FollowPlayer>().enabled = true;
-            GameModel.IsReadying = true; 
+            if (!GameModel.IsReadying) GameObject.Find("Time").transform.Find("countDown").gameObject.SetActive(true);// 显示开始倒计时
+            GameModel.IsReadying = true;
+            gameObject.GetComponent<FollowPlayer>().enabled = true; // 启用相机跟随
         }
     }
 
@@ -49,12 +51,12 @@ public class Camera : MonoBehaviour
     public void InitOrReset()
     {
         Debug.Log("重置相机位置");
-        gameObject.GetComponent<FollowPlayer>().enabled = false;
+        gameObject.GetComponent<FollowPlayer>().enabled = false; // 禁用相机跟随
         transform.position = _startPos;
         transform.rotation = _startRot;
     }
 
-
+    // 相机是否准备就绪
     public bool IsReady()
     {
         return (Mathf.Abs(transform.position.y - endPos.y) < 0.1 && Mathf.Abs(transform.position.z - endPos.z) < 0.1 && Mathf.Abs(transform.rotation.x - _endRot.x) < 0.1f);

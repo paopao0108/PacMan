@@ -15,11 +15,7 @@ public class GameController
 
     public bool IsSuccess()
     {
-        // 胜利
-        // 3. 吃完豆子，并且在迷宫中
-        //Console.WriteLine("当前分数：" + ScoreModel.GetInstance().CurScore);
-        //Console.WriteLine("目标分数：" + GameModel.GetInstance().Score);
-        if (ScoreModel.GetInstance().CurScore >= GameModel.GetInstance().Score)
+        if (ScoreModel.GetInstance().CurScore >= DotManager.dotsCount)
         {
             return true;
         }
@@ -28,24 +24,28 @@ public class GameController
 
     public void Fail()
     {
-        // 处理失败后的逻辑
-        // 1. 碰到敌人
-        // 2. 走出迷宫
-        // 3. 用时结束
-        GameOver();
+        GameOver(); // 处理失败后的逻辑
     }
 
     public void Success()
     {
-        // 处理成功后逻辑
-        GameOver();
+        GameOver(); // 处理成功后逻辑
     }
 
-    // 成功或失败都是GameOver
     private void GameOver()
     {
         GameModel.IsGameOver = true;
         if (ScoreModel.GetInstance().BestScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", ScoreModel.GetInstance().BestScore);
+
+        // TODO 添加排行耪
+        //ScoreModel.GetInstance().UpdateScoreRank(); // 更新排名
+        //ScoreModel.GetInstance().GetRank(); // 获取当前排名
+        //foreach (int score in ScoreModel.scoreRank)
+        //{
+        //    Debug.Log("分数列表：" + score);
+        //}
+        //Debug.Log("当前排名：" + ScoreModel.GetInstance().GetRank());
+
         GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true);
     }
 }

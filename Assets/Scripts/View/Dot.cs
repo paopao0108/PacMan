@@ -6,6 +6,11 @@ public class Dot : MonoBehaviour
 {
     public void Dispear()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void Appear()
+    {
+        gameObject.SetActive(true);
     }
 }

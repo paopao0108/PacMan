@@ -5,17 +5,30 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public int no; // 敌人编号
+    public string type; // 敌人类型
 
     void Start()
     {
-
+        InitOrReset();
+        GameEvent.gameAgain.Register(InitOrReset);
     }
 
     void Update()
     {
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.gameAgain.UnRegister(InitOrReset);
+    }
+
+    public void InitOrReset()
+    {
+        // 1. 获取当前对象类型 type
+        // 2. 根据类型设置初始位置
+        Debug.Log("敌人类型：" + type + " 位置：" + Constant.Mapping.GhostPos[type]);
+        transform.localPosition = Constant.Mapping.GhostPos[type];
+    }
 
     //private void Sleep(NavMeshAgent g)
     //{
