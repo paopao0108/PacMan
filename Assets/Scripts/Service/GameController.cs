@@ -40,8 +40,6 @@ public class GameController
 
     private void GameOver()
     {
-
-        //AudioController.Instance.endAudio.Play();
         GameModel.IsGameOver = true;
         if (ScoreModel.GetInstance().BestScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", ScoreModel.GetInstance().BestScore);
 
@@ -60,5 +58,7 @@ public class GameController
 
         GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true); // 显示结束页面
         EndMenu.Instance.ShowInfo();
+        
+        GameEvent.gameOver.Trigger();
     }
 }

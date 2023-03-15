@@ -70,7 +70,7 @@ public class PacMan : MonoBehaviour
     {
         //碰撞到的游戏物体名字
         Debug.Log("PacMan碰到物体：" + collision.gameObject.tag);
-        if (collision.gameObject.tag == "Dot")
+        if (collision.gameObject.CompareTag("Dot"))
         {
             Debug.Log("吃掉豆子");
             eatAudio.Play();
@@ -78,7 +78,7 @@ public class PacMan : MonoBehaviour
             GameEvent.scoreChange.Trigger(); // 更新页面分数
             if (GameController.GetInstance().IsSuccess()) GameController.GetInstance().Success(); // 判断是否取胜
         }
-        else if (collision.gameObject.tag == "Enemy")
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("碰到敌人"); // 游戏失败
             if (!GameModel.IsGameOver) GameController.GetInstance().Fail();

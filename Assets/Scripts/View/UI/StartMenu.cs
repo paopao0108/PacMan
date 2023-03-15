@@ -17,6 +17,8 @@ public class StartMenu : MonoBehaviour
     void Start()
     {
         startBtn.onClick.AddListener(OnStartBtnClick);
+        settingBtn.onClick.AddListener(OnSettingBtnClick);
+
     }
 
     public void OnStartBtnClick()
@@ -25,5 +27,11 @@ public class StartMenu : MonoBehaviour
         //AudioController.Instance.startAudio.Stop();
         //AudioController.Instance.readyAudio.Play();
         gameObject.SetActive(false);
+    }
+    
+    public void OnSettingBtnClick()
+    {
+        gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("SettingMenu").gameObject.SetActive(true);
     }
 }

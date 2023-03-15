@@ -29,8 +29,8 @@ public class Score : MonoBehaviour
     private void OnScoreChange()
     {
         ScoreModel.GetInstance().UpdateScore(); // 更新分数
-        _curScoreText.text = "CURRENT SCORE: " + ScoreModel.GetInstance().CurScore; // 更新页面
-        _bestScoreText.text = "BEST SCORE: " + ScoreModel.GetInstance().BestScore;
+        _curScoreText.text = " " + "CURRENT SCORE: " + ScoreModel.GetInstance().CurScore; // 更新页面
+        _bestScoreText.text = " " + "BEST SCORE: " + ScoreModel.GetInstance().BestScore;
     }
 
     public void InitOrReset()

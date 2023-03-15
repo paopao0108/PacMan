@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         // 1. 获取当前对象类型 type
         // 2. 根据类型设置初始位置
+        Debug.Log("========================");
         Debug.Log("敌人类型：" + type + " 位置：" + Constant.Mapping.GhostPos[type]);
         transform.localPosition = Constant.Mapping.GhostPos[type];
     }

@@ -13,8 +13,9 @@ public class AudioController : MonoBehaviour
     public AudioSource readyAudio;
     public AudioSource endAudio;
     public AudioSource gameTimeAudio;
-
-    public AudioClip[] audios;
+    public static AudioSource currentAudio;
+    
+    public float volume = 0.7f;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class AudioController : MonoBehaviour
     }
     void Start()
     {
-        
+        startAudio.volume = volume;
     }
 
     void Update()
@@ -32,10 +33,11 @@ public class AudioController : MonoBehaviour
         if (GameModel.IsSwitchCamera)
         {
             endAudio.Stop();
-            if (!readyAudio.isPlaying) // À­½üÉãÏñÍ·£¬¿ªÊ¼µ¹¼ÆÊ±
+            if (!readyAudio.isPlaying) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê±
             {
                 startAudio.Stop();
                 readyAudio.Play();
+                // currentAudio = readyAudio;
             }
         }
             
@@ -46,6 +48,7 @@ public class AudioController : MonoBehaviour
             if (!gameTimeAudio.isPlaying)
             {
                 gameTimeAudio.Play();
+                currentAudio = gameTimeAudio;
             }
         }
 
@@ -55,8 +58,14 @@ public class AudioController : MonoBehaviour
             if (!endAudio.isPlaying)
             {
                 endAudio.Play();
+                // currentAudio = endAudio;
             }
         }
 
+    }
+
+    public void ChangeVolume()
+    {
+        
     }
 }
