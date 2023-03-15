@@ -6,7 +6,9 @@ public class GameModel
     private int _score = 35; // 获得胜利的分数
 
     public static int startCountDown = 3; // 游戏开始倒计时
-    public static int gameCountDown = 60; // 游戏时间
+    public static int gameTime = 60; // 游戏时间
+    public static int leftTime = gameTime; // 剩余时间
+
     public static bool IsSwitchCamera = false; // 相机拉近
     public static bool IsReadying = false; // 倒计时准备
     public static bool IsGameStart = false; // 游戏开始
@@ -21,7 +23,7 @@ public class GameModel
     public static void Reset()
     {
         startCountDown = 3;
-        gameCountDown = 60;
+        leftTime = 60;
         ScoreModel.GetInstance().CurScore = 0;
         IsSwitchCamera = true;
         IsReadying = false;

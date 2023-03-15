@@ -46,6 +46,11 @@ public class GameController
         //}
         //Debug.Log("当前排名：" + ScoreModel.GetInstance().GetRank());
 
-        GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true);
+        
+        GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(false); // 隐藏游戏计时
+        GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(false); // 隐藏得分
+
+        GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true); // 显示结束页面
+        EndMenu.Instance.ShowInfo();
     }
 }

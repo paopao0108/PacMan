@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class GameTime : MonoBehaviour
 {
-    //public static int GameModel.gameCountDown = 60;
+    //public static int GameModel.leftTime = 60;
     private TextMeshProUGUI number;
     public float timeInterval = 1;
-
 
     void Start()
     {
         number = transform.Find("number").GetComponent<TextMeshProUGUI>();
         InitOrReset();
+        GameEvent.gameStart.Register(InitOrReset);
     }
      
     void Update()
     {
-        if (GameModel.gameCountDown < 0) EndCountDown();
-        if (!GameModel.IsGameStart || GameModel.gameCountDown < 0) return;
+        if (GameModel.leftTime < 0) EndCountDown();
+        if (!GameModel.IsGameStart || GameModel.leftTime < 0) return;
         if (timeInterval > 0)
         {
             timeInterval -= Time.deltaTime;
@@ -31,16 +31,21 @@ public class GameTime : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.gameStart.UnRegister(InitOrReset);
+    }
+
     public void InitOrReset()
     {
-        GameModel.gameCountDown = 60;
-        number.text = "LeftTime: " + GameModel.gameCountDown + "s";
+        GameModel.leftTime = 60;
+        number.text = "LeftTime: " + GameModel.leftTime + "s";
     }
 
     public void ChangeText()
     {
-        --GameModel.gameCountDown;
-        number.text = "LeftTime: " + GameModel.gameCountDown + "s";
+        --GameModel.leftTime;
+        number.text = "LeftTime: " + GameModel.leftTime + "s";
     }
 
     // 计时结束

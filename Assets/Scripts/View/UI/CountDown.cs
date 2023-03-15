@@ -68,11 +68,14 @@ public class CountDown : MonoBehaviour
 
     }
 
-    // 计时结束
+    // 计时结束，游戏开始
     public virtual void EndCountDown()
     {
         gameObject.SetActive(false);
         GameModel.IsGameStart = true;
+
+        GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(true); // 显示游戏计时
+        GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(true); // 显示得分
         GameEvent.gameStart.Trigger();
     }
 }
