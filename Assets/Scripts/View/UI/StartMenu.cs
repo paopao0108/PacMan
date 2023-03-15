@@ -22,6 +22,8 @@ public class StartMenu : MonoBehaviour
     public void OnStartBtnClick()
     {
         GameModel.IsSwitchCamera = true;
+        //AudioController.Instance.startAudio.Stop();
+        //AudioController.Instance.readyAudio.Play();
         gameObject.SetActive(false);
     }
 }

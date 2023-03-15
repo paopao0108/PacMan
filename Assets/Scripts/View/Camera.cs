@@ -13,6 +13,7 @@ public class Camera : MonoBehaviour
 
 
     public Vector3 endPos = new Vector3(0, 3, 1.5f);
+    public AudioSource startAudio;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class Camera : MonoBehaviour
         if (IsReady())
         {
             if (!GameModel.IsReadying) GameObject.Find("Time").transform.Find("countDown").gameObject.SetActive(true);// 显示开始倒计时
+            GameModel.IsSwitchCamera = false; 
             GameModel.IsReadying = true;
             gameObject.GetComponent<FollowPlayer>().enabled = true; // 启用相机跟随
         }

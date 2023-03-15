@@ -24,16 +24,24 @@ public class GameController
 
     public void Fail()
     {
+        Debug.Log("Fail");
         GameOver(); // 处理失败后的逻辑
+        GameObject.Find("EndMenu").transform.Find("NextBtn").gameObject.SetActive(false); // 隐藏下一关按钮
+
     }
 
     public void Success()
     {
+        Debug.Log("success");
         GameOver(); // 处理成功后逻辑
+        GameObject.Find("EndMenu").transform.Find("NextBtn").gameObject.SetActive(true); // 显示下一关按钮
+
     }
 
     private void GameOver()
     {
+
+        //AudioController.Instance.endAudio.Play();
         GameModel.IsGameOver = true;
         if (ScoreModel.GetInstance().BestScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", ScoreModel.GetInstance().BestScore);
 

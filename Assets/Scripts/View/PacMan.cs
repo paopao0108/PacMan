@@ -12,6 +12,7 @@ public class PacMan : MonoBehaviour
     public float angleSpeed = 0.5f;
     public float speed = 10.0f;
     public Score score;
+    public AudioSource eatAudio;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class PacMan : MonoBehaviour
         if (collision.gameObject.tag == "Dot")
         {
             Debug.Log("吃掉豆子");
+            eatAudio.Play();
             collision.gameObject.GetComponent<Dot>().Dispear(); // 吃掉豆子
             GameEvent.scoreChange.Trigger(); // 更新页面分数
             if (GameController.GetInstance().IsSuccess()) GameController.GetInstance().Success(); // 判断是否取胜
@@ -79,7 +81,7 @@ public class PacMan : MonoBehaviour
         else if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("碰到敌人"); // 游戏失败
-            GameController.GetInstance().Fail();
+            if (!GameModel.IsGameOver) GameController.GetInstance().Fail();
         }
     }
 
