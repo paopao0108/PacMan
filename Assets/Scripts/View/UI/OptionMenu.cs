@@ -21,7 +21,7 @@ public class OptionMenu : MonoBehaviour
     {
         pauseBtn.onClick.AddListener(OnPauseBtnClick);
         continueBtn.onClick.AddListener(OnContinueBtnClick);
-        continueBtn.onClick.AddListener(OnRestartBtnClick);
+        restartBtn.onClick.AddListener(OnRestartBtnClick);
     }
 
     // Update is called once per frame
@@ -47,11 +47,11 @@ public class OptionMenu : MonoBehaviour
 
     private void OnRestartBtnClick()
     {
-        AudioController.isPaused = true;
-        Debug.Log("当前音乐：" + AudioController.currentAudio);
-        AudioController.currentAudio.Stop();
+        //AudioController.isPaused = true;
+        //Debug.Log("当前音乐：" + AudioController.currentAudio);
+        //AudioController.currentAudio.Stop();
         
-        GameModel.Reset(); // 重置数据
-        GameController.HanadleGameOver();
+        //GameModel.Reset(); // 重置数据
+        //GameController.HanadleGameOver();
     }
 }

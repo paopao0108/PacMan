@@ -37,7 +37,7 @@ public class AudioController : MonoBehaviour
             {
                 startAudio.Stop();
                 readyAudio.Play();
-                // currentAudio = readyAudio;
+                 currentAudio = readyAudio;
             }
         }
             
@@ -58,14 +58,9 @@ public class AudioController : MonoBehaviour
             if (!endAudio.isPlaying)
             {
                 endAudio.Play();
-                // currentAudio = endAudio;
+                 currentAudio = endAudio;
             }
         }
 
-    }
-
-    public void ChangeVolume()
-    {
-        
     }
 }
