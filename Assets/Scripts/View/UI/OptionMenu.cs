@@ -32,24 +32,24 @@ public class OptionMenu : MonoBehaviour
 
     private void OnPauseBtnClick()
     {
-        AudioController.isPaused = true;
-        AudioController.currentAudio.Pause();
-        //Debug.Log("音频" + AudioController.currentAudio);
+        AudioCtrl.isPaused = true;
+        AudioCtrl.currentAudio.Pause();
+        //Debug.Log("音频" + AudioCtrl.currentAudio);
         Time.timeScale = 0;
     }
     
     private void OnContinueBtnClick()
     {
-        AudioController.isPaused = false;
-        AudioController.currentAudio.UnPause();
+        AudioCtrl.isPaused = false;
+        AudioCtrl.currentAudio.UnPause();
         Time.timeScale = 1;
     }
 
     private void OnRestartBtnClick()
     {
-        AudioController.isPaused = true;
-        //Debug.Log("当前音乐：" + AudioController.currentAudio);
-        AudioController.currentAudio.Stop();
+        AudioCtrl.isPaused = true;
+        //Debug.Log("当前音乐：" + AudioCtrl.currentAudio);
+        AudioCtrl.currentAudio.Stop();
 
         GameModel.Reset(); // 重置数据
         GameController.HanadleGameOver();

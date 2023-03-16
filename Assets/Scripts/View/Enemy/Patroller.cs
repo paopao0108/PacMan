@@ -15,9 +15,9 @@ public class Patroller : MonoBehaviour
         _mNavMeshAgent = GetComponent<NavMeshAgent>();
         _mNavMeshAgent.stoppingDistance = stopDistance; //设置追踪停止的最近距离，小于等于这个具体，就不会在进行追踪，一旦超过就会继续追踪
         InitOrReset();
-        GameEvent.gameStart.Register(StartTrack); // 注册开始追踪事件
-        GameEvent.gameOver.Register(InitOrReset); // 
-        //GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.gameStart.Register(StartTrack); // 注册开始追踪事件
+        GameEvt.gameOver.Register(InitOrReset); // 
+        //GameEvt.gameAgain.Register(InitOrReset);
 
 
         // 测试
@@ -44,9 +44,9 @@ public class Patroller : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvent.gameStart.UnRegister(StartTrack);
-        GameEvent.gameOver.UnRegister(InitOrReset);
-        //GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.gameStart.UnRegister(StartTrack);
+        GameEvt.gameOver.UnRegister(InitOrReset);
+        //GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()

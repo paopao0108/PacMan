@@ -6,8 +6,8 @@ public class ScoreModel
 {
     //private static ScoreModel _instance;
     private static ScoreModel _instance;
-    private int _bestScore = 0; // ×î¸ß·ÖÊı
-    private int _curScore = 0; // µ±Ç°·ÖÊı
+    private int _bestScore = 0; // æœ€é«˜åˆ†æ•°
+    private int _curScore = 0; // å½“å‰åˆ†æ•°
     
 
     public int BestScore { get => _bestScore; set => _bestScore = value; }
@@ -35,7 +35,7 @@ public class ScoreModel
 
     public void UpdateBestScore()
     {
-        //Debug.Log("¸üĞÂ×î¸ß·Ö: " + PlayerPrefs.GetInt("BestScore"));
+        //Debug.Log("æ›´æ–°æœ€é«˜åˆ†: " + PlayerPrefs.GetInt("BestScore"));
         //if (CurScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", CurScore);  // BestScore = CurScore;
         if (CurScore > BestScore) BestScore = CurScore;
     }
@@ -43,7 +43,7 @@ public class ScoreModel
     public void UpdateScoreRank()
     {
         scoreRank.Add(CurScore);
-        scoreRank.Sort(); // ÅÅĞò
+        scoreRank.Sort(); // æ’åº
     }
 
     public int GetRank()

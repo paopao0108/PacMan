@@ -11,26 +11,26 @@ public class DotManager : MonoBehaviour
     {
         dots = GetComponentsInChildren<Dot>();
         dotsCount = dots.Length;
-        //Debug.Log("¶¹×ÓÊıÁ¿£º" + dotsCount);
+        //Debug.Log("è±†å­æ•°é‡ï¼š" + dotsCount);
     }
 
     private void Start()
     {
         InitOrReset();
-        GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.gameAgain.Register(InitOrReset);
     }
 
     private void OnDestroy()
     {
-        GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()
     {
-        //Debug.Log("¶¹×ÓÊıÁ¿£º" + dotsCount);
+        //Debug.Log("è±†å­æ•°é‡ï¼š" + dotsCount);
         foreach( Dot dot in dots)
         {
-            //Debug.Log("¶¹×Ó£º" + dot);
+            //Debug.Log("è±†å­ï¼š" + dot);
             dot.Appear();
         }
     }

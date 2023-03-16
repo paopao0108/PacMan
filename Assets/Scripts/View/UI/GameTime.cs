@@ -13,7 +13,7 @@ public class GameTime : MonoBehaviour
     {
         number = transform.Find("number").GetComponent<TextMeshProUGUI>();
         InitOrReset();
-        GameEvent.gameStart.Register(InitOrReset);
+        GameEvt.gameStart.Register(InitOrReset);
     }
      
     void Update()
@@ -33,7 +33,7 @@ public class GameTime : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvent.gameStart.UnRegister(InitOrReset);
+        GameEvt.gameStart.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()

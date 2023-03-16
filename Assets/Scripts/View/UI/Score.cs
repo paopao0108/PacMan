@@ -16,14 +16,14 @@ public class Score : MonoBehaviour
     private void Start()
     {
         InitOrReset();
-        GameEvent.scoreChange.Register(OnScoreChange); // 注册事件
-        GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.scoreChange.Register(OnScoreChange); // 注册事件
+        GameEvt.gameAgain.Register(InitOrReset);
     }
 
     private void OnDestroy()
     {
-        GameEvent.scoreChange.UnRegister(OnScoreChange); // 注销事件
-        GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.scoreChange.UnRegister(OnScoreChange); // 注销事件
+        GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     private void OnScoreChange()

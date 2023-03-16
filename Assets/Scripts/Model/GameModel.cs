@@ -20,7 +20,7 @@ public class GameModel
         startCountDown = 3;
         leftTime = 60;
         ScoreModel.GetInstance().CurScore = 0;
-        AudioController.isPaused = false;
+        AudioCtrl.isPaused = false;
         IsSwitchCamera = true;
         IsReadying = false;
         IsGameStart = false;
