@@ -14,7 +14,7 @@ public class AudioController : MonoBehaviour
     public AudioSource endAudio;
     public AudioSource gameTimeAudio;
     public static AudioSource currentAudio;
-    
+    public static bool isPaused = false; // 是否暂停
     public float volume = 0.7f;
 
     private void Awake()
@@ -30,7 +30,7 @@ public class AudioController : MonoBehaviour
     void Update()
     {
 
-        if (GameModel.IsSwitchCamera)
+        if (GameModel.IsSwitchCamera && !isPaused)
         {
             endAudio.Stop();
             if (!readyAudio.isPlaying) // ��������ͷ����ʼ����ʱ
@@ -42,7 +42,7 @@ public class AudioController : MonoBehaviour
         }
             
 
-        if (GameModel.IsGameStart)
+        if (GameModel.IsGameStart && !isPaused)
         {
             readyAudio.Stop();
             if (!gameTimeAudio.isPlaying)

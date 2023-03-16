@@ -10,8 +10,6 @@ public class CountDown : MonoBehaviour
     public bool IsShow = false;
     public float timeInterval = 1;
 
-
-
     void Start()
     {
         number = transform.Find("number").GetComponent<TextMeshProUGUI>();
@@ -21,10 +19,7 @@ public class CountDown : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("开始倒计时：" + GameModel.startCountDown);
-        //if (GameModel._startCountDown < 0) EndCountDown();
-        //if (!GameModel.IsReadying || GameModel._startCountDown < 0) return;
-
+        //Debug.Log("开始倒计时：" + GameModel.startCountDown);
         if (!GameModel.IsReadying) return;
         if (GameModel.startCountDown < 0)
         {
@@ -63,9 +58,7 @@ public class CountDown : MonoBehaviour
     {
         --GameModel.startCountDown;
         number.text = GameModel.startCountDown == 0 ? "Ready GO!" : GameModel.startCountDown.ToString();
-        number.fontSize = GameModel.startCountDown == 0 ? 10 : 40;
-        //number.fontSize = 40;
-
+        number.fontSize = GameModel.startCountDown == 0 ? 5 : 40;
     }
 
     // 计时结束，游戏开始
@@ -76,6 +69,7 @@ public class CountDown : MonoBehaviour
 
         GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(true); // 显示游戏计时
         GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(true); // 显示得分
+        GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(true); // 显示得分
         GameEvent.gameStart.Trigger();
     }
 }

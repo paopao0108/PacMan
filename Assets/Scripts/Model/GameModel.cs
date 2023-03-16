@@ -3,8 +3,6 @@ using System;
 public class GameModel 
 {
     private static GameModel _instance;
-    private int _score = 35; // 获得胜利的分数
-
     public static int startCountDown = 3; // 游戏开始倒计时
     public static int gameTime = 60; // 游戏时间
     public static int leftTime = gameTime; // 剩余时间
@@ -15,10 +13,7 @@ public class GameModel
     public static bool IsGameOver = false; // 游戏结束
     //public static bool isTrackerStop = true; // 追踪者是否停止移动
 
-
     private GameModel() { }
-
-    public int Score { get => _score; }
 
     public static void Reset()
     {

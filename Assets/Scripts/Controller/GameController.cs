@@ -40,8 +40,10 @@ public class GameController
 
     private void GameOver()
     {
-        GameModel.IsGameOver = true;
         if (ScoreModel.GetInstance().BestScore > PlayerPrefs.GetInt("BestScore")) PlayerPrefs.SetInt("BestScore", ScoreModel.GetInstance().BestScore);
+        GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true); // 显示结束页面
+        EndMenu.Instance.ShowInfo();
+        HanadleGameOver();
 
         // TODO 添加排行耪
         //ScoreModel.GetInstance().UpdateScoreRank(); // 更新排名
@@ -51,14 +53,14 @@ public class GameController
         //    Debug.Log("分数列表：" + score);
         //}
         //Debug.Log("当前排名：" + ScoreModel.GetInstance().GetRank());
+    }
 
-        
+    public static void HanadleGameOver()
+    {
+        GameModel.IsGameOver = true;
         GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(false); // 隐藏游戏计时
         GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(false); // 隐藏得分
-
-        GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true); // 显示结束页面
-        EndMenu.Instance.ShowInfo();
-        
+        GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(false); // 隐藏选项
         GameEvent.gameOver.Trigger();
     }
 }

@@ -5,29 +5,9 @@ using UnityEngine.AI;
 
 public class TrackPlayer : MonoBehaviour
 {
-    //public NavMeshAgent agent;
-    //public Transform[] Points;//通过数组形式可设置多个监测点
-    //int currentPoint;
-
-    //void Start()
-    //{
-    //    agent = GetComponent<NavMeshAgent>();
-    //    agent.SetDestination(Points[0].position);//通过Nav Mesh Agent组件的SetDestination 方法括号内为一个Vector3目标点
-    //}
-
-    //void Update()
-    //{
-    //    if (agent.remainingDistance < agent.stoppingDistance)//到目标的剩余距离是否小于之前在 Inspector窗口中设置的停止距离
-    //    {
-    //        currentPoint = (currentPoint + 1) % Points.Length;//采用取余的方法实现敌人巡逻轨迹的循环
-    //        agent.SetDestination(Points[currentPoint].position);
-    //    }
-    //}
-
-    
     public NavMeshAgent _mNavMeshAgent; // 自动追踪agent
     public Transform playerTransform; // 要追踪的物体
-    public float stopDistance = 0.0f;
+    private float stopDistance = 0f;
 
     void Start()
     {
@@ -36,7 +16,7 @@ public class TrackPlayer : MonoBehaviour
         InitOrReset();
         GameEvent.gameStart.Register(StartTrack); // 注册开始追踪事件
         GameEvent.gameOver.Register(InitOrReset); // 
-        // GameEvent.gameAgain.Register(InitOrReset);
+        //GameEvent.gameAgain.Register(InitOrReset);
     }
 
     void Update()
@@ -44,14 +24,14 @@ public class TrackPlayer : MonoBehaviour
         if (!GameModel.IsGameStart || GameModel.IsGameOver) return;
         if (_mNavMeshAgent.isStopped) return;
         _mNavMeshAgent.SetDestination(playerTransform.position); //设置目标位置
-        Debug.Log("正在追踪！");
+        //Debug.Log("正在追踪！");
     }
 
     private void OnDestroy()
     {
         GameEvent.gameStart.UnRegister(StartTrack);
         GameEvent.gameOver.UnRegister(InitOrReset);
-        // GameEvent.gameAgain.UnRegister(InitOrReset);
+        //GameEvent.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()

@@ -5,20 +5,16 @@ using UnityEngine;
 public class PacMan : MonoBehaviour
 {
     private int angle = 0;
-    private float y; // 对象的y坐标
-    private Vector3 startPos = new Vector3(0.12f, 1.69f, 6.93f);
+    private Vector3 startPos = Constant.Position.PacManStartPos;
 
     public float dropRange = 3; // 允许掉落高度的范围
-    public float angleSpeed = 0.5f;
+    public float angleSpeed = 10f;
     public float speed = 10.0f;
     public Score score;
     public AudioSource eatAudio;
 
     private void Awake()
     {
-        //transform.position = startPos;
-        //Debug.Log("吃豆人世界坐标：" + transform.position);
-        //Debug.Log("吃豆人自身坐标：" + transform.localPosition);
         InitOrReset();
     }
 
@@ -31,16 +27,11 @@ public class PacMan : MonoBehaviour
     {
         if (!GameModel.IsGameStart || GameModel.IsGameOver) return;
         if (IsDrop(transform.position.y)) GameController.GetInstance().Fail();
-
         float horizontal = Input.GetAxis("Horizontal");
         float vetical = Input.GetAxis("Vertical");
-        //transform.Translate(horizontal * speed * Time.deltaTime,  0, vetical * speed * Time.deltaTime);
         if (vetical != 0 || horizontal != 0) transform.Translate(0, 0, speed * Time.deltaTime); // 按物体正方向移动
-        //或
-        //transform.position += new Vector3(horizontal * speed * Time.deltaTime, vetical * speed * Time.deltaTime, 0);
-
         Direction(horizontal, vetical);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, angle, 0), angleSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, angle, 0), angleSpeed * Time.deltaTime);
     }
 
     private void OnDestroy()
@@ -63,16 +54,13 @@ public class PacMan : MonoBehaviour
     // 是否出界掉落
     public bool IsDrop(float newy)
     {
-        return Mathf.Abs(newy - y) > dropRange;
+        return Mathf.Abs(newy - startPos.y) > dropRange;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        //碰撞到的游戏物体名字
-        Debug.Log("PacMan碰到物体：" + collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("Dot"))
+        if (collision.gameObject.CompareTag("Dot")) // 碰撞到的游戏物体名字
         {
-            Debug.Log("吃掉豆子");
             eatAudio.Play();
             collision.gameObject.GetComponent<Dot>().Dispear(); // 吃掉豆子
             GameEvent.scoreChange.Trigger(); // 更新页面分数
@@ -80,8 +68,7 @@ public class PacMan : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("碰到敌人"); // 游戏失败
-            if (!GameModel.IsGameOver) GameController.GetInstance().Fail();
+            if (!GameModel.IsGameOver) GameController.GetInstance().Fail(); // 游戏失败
         }
     }
 

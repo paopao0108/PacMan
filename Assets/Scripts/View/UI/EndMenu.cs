@@ -30,7 +30,7 @@ public class EndMenu : MonoBehaviour
         // 1. 隐藏当前页面
         gameObject.SetActive(false);
         //AudioController.Instance.endAudio.Stop();
-        GameModel.Reset();
+        GameModel.Reset(); // 重置数据
         GameEvent.gameAgain.Trigger(); // 重置摄像头 重置物体位置; 重置分数、计时器
     }
 
@@ -46,7 +46,7 @@ public class EndMenu : MonoBehaviour
     // 显示本关得分和用时
     public void ShowInfo()
     {
-        Debug.Log("得分：" + GameObject.Find("Score").GetComponent<TextMeshProUGUI>());
+        //Debug.Log("得分：" + GameObject.Find("Score").GetComponent<TextMeshProUGUI>());
         GameObject.Find("Score").GetComponent<TextMeshProUGUI>().text = "score: " + ScoreModel.GetInstance().CurScore;
         int spendTime = GameModel.gameTime - GameModel.leftTime;
         GameObject.Find("SpendTime").GetComponent<TextMeshProUGUI>().text = spendTime > 60 ? "Time Out!" : "time: " + spendTime + "s";
