@@ -22,7 +22,7 @@ public class Camera : MonoBehaviour
 
     void Start()
     {
-        GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.gameAgain.Register(InitOrReset);
         //Debug.Log("倒计时：" + GameObject.Find("Time").transform.Find("countDown"));
     }
 
@@ -47,7 +47,7 @@ public class Camera : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()

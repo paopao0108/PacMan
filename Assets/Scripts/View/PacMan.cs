@@ -20,7 +20,7 @@ public class PacMan : MonoBehaviour
 
     private void Start()
     {
-        GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.gameAgain.Register(InitOrReset);
     }
 
     private void FixedUpdate()
@@ -36,7 +36,7 @@ public class PacMan : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()
@@ -63,7 +63,7 @@ public class PacMan : MonoBehaviour
         {
             eatAudio.Play();
             collision.gameObject.GetComponent<Dot>().Dispear(); // 吃掉豆子
-            GameEvent.scoreChange.Trigger(); // 更新页面分数
+            GameEvt.scoreChange.Trigger(); // 更新页面分数
             if (GameController.GetInstance().IsSuccess()) GameController.GetInstance().Success(); // 判断是否取胜
         }
         else if (collision.gameObject.CompareTag("Enemy"))

@@ -29,9 +29,9 @@ public class EndMenu : MonoBehaviour
     {
         // 1. 隐藏当前页面
         gameObject.SetActive(false);
-        //AudioController.Instance.endAudio.Stop();
+        //AudioCtrl.Instance.endAudio.Stop();
         GameModel.Reset(); // 重置数据
-        GameEvent.gameAgain.Trigger(); // 重置摄像头 重置物体位置; 重置分数、计时器
+        GameEvt.gameAgain.Trigger(); // 重置摄像头 重置物体位置; 重置分数、计时器
     }
 
     public void OnExitBtnClick()

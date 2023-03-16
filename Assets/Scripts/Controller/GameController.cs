@@ -57,16 +57,15 @@ public class GameController
         GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(false); // 隐藏得分
         GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(false); // 隐藏选项
         GameObject.Find("Canvas").transform.Find("EndMenu").gameObject.SetActive(true); // 显示结束页面
+        GameEvt.gameOver.Trigger();
         EndMenu.Instance.ShowInfo();
-        GameEvent.gameOver.Trigger();
     }
 
     public static void HanadleGameOver() 
     {
-        //GameModel.IsGameOver = true;
         GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(false); // 隐藏游戏计时
         GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(false); // 隐藏得分
         GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(false); // 隐藏选项
-        GameEvent.gameOver.Trigger();
+        GameEvt.gameOver.Trigger();
     }
 }

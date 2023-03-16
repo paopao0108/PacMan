@@ -14,7 +14,7 @@ public class CountDown : MonoBehaviour
     {
         number = transform.Find("number").GetComponent<TextMeshProUGUI>();
         gameObject.SetActive(false);
-        GameEvent.gameAgain.Register(InitOrReset); // 注册重置倒计时事件
+        GameEvt.gameAgain.Register(InitOrReset); // 注册重置倒计时事件
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class CountDown : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEvent.gameAgain.UnRegister(InitOrReset); // 注销重置倒计时事件
+        GameEvt.gameAgain.UnRegister(InitOrReset); // 注销重置倒计时事件
     }
 
     public void InitOrReset()
@@ -70,6 +70,6 @@ public class CountDown : MonoBehaviour
         GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(true); // 显示游戏计时
         GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(true); // 显示得分
         GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(true); // 显示得分
-        GameEvent.gameStart.Trigger();
+        GameEvt.gameStart.Trigger();
     }
 }

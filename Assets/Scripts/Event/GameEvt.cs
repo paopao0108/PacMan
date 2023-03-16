@@ -1,5 +1,5 @@
 using System;
-public class GameEvent
+public class GameEvt
 {
     public static Event gameStart = new();
     public static Event scoreChange = new();

@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         InitOrReset();
-        GameEvent.gameAgain.Register(InitOrReset);
+        GameEvt.gameAgain.Register(InitOrReset);
     }
 
     private void OnDestroy()
     {
-        GameEvent.gameAgain.UnRegister(InitOrReset);
+        GameEvt.gameAgain.UnRegister(InitOrReset);
     }
 
     public void InitOrReset()

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioController : MonoBehaviour
+public class AudioCtrl : MonoBehaviour
 {
-    private static AudioController _instance;
+    private static AudioCtrl _instance;
 
-    public static AudioController Instance => _instance;
+    public static AudioCtrl Instance => _instance;
 
     public AudioSource startAudio;
     public AudioSource eatAudio;
