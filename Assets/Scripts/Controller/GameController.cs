@@ -61,5 +61,12 @@ public class GameController
         GameEvent.gameOver.Trigger();
     }
 
-    private void HanadleGameOver() { }
+    public static void HanadleGameOver() 
+    {
+        //GameModel.IsGameOver = true;
+        GameObject.Find("Time").transform.Find("gameTime").gameObject.SetActive(false); // 隐藏游戏计时
+        GameObject.Find("Canvas").transform.Find("Score").gameObject.SetActive(false); // 隐藏得分
+        GameObject.Find("Canvas").transform.Find("OptionMenu").gameObject.SetActive(false); // 隐藏选项
+        GameEvent.gameOver.Trigger();
+    }
 }

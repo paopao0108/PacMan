@@ -47,11 +47,11 @@ public class OptionMenu : MonoBehaviour
 
     private void OnRestartBtnClick()
     {
-        //AudioController.isPaused = true;
+        AudioController.isPaused = true;
         //Debug.Log("当前音乐：" + AudioController.currentAudio);
-        //AudioController.currentAudio.Stop();
-        
-        //GameModel.Reset(); // 重置数据
-        //GameController.HanadleGameOver();
+        AudioController.currentAudio.Stop();
+
+        GameModel.Reset(); // 重置数据
+        GameController.HanadleGameOver();
     }
 }
