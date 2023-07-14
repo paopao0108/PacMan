@@ -71,6 +71,4 @@ public class PacMan : MonoBehaviour
             if (!GameModel.IsGameOver) GameController.GetInstance().Fail(); // 游戏失败
         }
     }
-
-
 }
